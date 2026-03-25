@@ -15,6 +15,11 @@ class CounterController extends ChangeNotifier {
 
   void increment() {
     counter.value++;
+    //** notifyListeners() does NOT say WHICH place changed It only says:
+    // “Hey, something changed in this controller”
+    //"Who is listening to this controller?" -> rebuild ALL of them
+    //Provider does NOT track fields (like value, name, etc.)
+    // It only tracks: Which widgets are listening to this controller */
     notifyListeners();
   }
 

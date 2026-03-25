@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/features/counter/data/counter_repository.dart';
+import 'package:provider/provider.dart';
 import 'package:test_app/features/counter/presentation/state/counter_controller.dart';
 import '../widgets/counter_card.dart';
 
-class CounterPage extends StatefulWidget {
-  @override
-  State<CounterPage> createState() => _CounterPageState();
-}
-
-class _CounterPageState extends State<CounterPage> {
-  late CounterController controller;
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller = CounterController(CounterRepository());
-
-    controller.addListener(() {
-      setState(() {});
-    });
-  }
-
+/// “Which widget is listening?” The widget where this line is written is the listener
+class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /** final controller = Provider.of<CounterController>(context); -
+     *  “Hey Provider, give me the CounterController” */
+
+    final controller = Provider.of<CounterController>(context);
+
+    /// Provider.of<CounterController>(context) - "Rebuild THIS widget when data changes"
     return Scaffold(
-      appBar: AppBar(title: Text('Clean Counter')),
+      appBar: AppBar(title: Text('Provider Counter')),
       body: Center(
         child: CounterCard(
           value: controller.value,
