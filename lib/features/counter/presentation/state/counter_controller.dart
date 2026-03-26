@@ -27,4 +27,9 @@ class CounterController extends ChangeNotifier {
     counter.value--;
     notifyListeners();
   }
+
+  void reset() {
+    counter.value = 0;
+    notifyListeners();
+  }
 }

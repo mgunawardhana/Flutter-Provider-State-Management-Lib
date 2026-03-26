@@ -10,16 +10,24 @@ class CounterPage extends StatelessWidget {
     /** final controller = Provider.of<CounterController>(context); -
      *  “Hey Provider, give me the CounterController” */
 
-    final controller = Provider.of<CounterController>(context);
+    // final controller = Provider.of<CounterController>(context);
 
     /// Provider.of<CounterController>(context) - "Rebuild THIS widget when data changes"
     return Scaffold(
       appBar: AppBar(title: Text('Provider Counter')),
       body: Center(
         child: CounterCard(
-          value: controller.value,
-          onIncrement: controller.increment,
-          onDecrement: controller.decrement,
+          value: Provider.of<CounterController>(context).value,
+          onIncrement: () => Provider.of<CounterController>(
+            context,
+            listen: false,
+          ).increment(),
+          onDecrement: () => Provider.of<CounterController>(
+            context,
+            listen: false,
+          ).decrement(),
+          onReset: () =>
+              Provider.of<CounterController>(context, listen: false).reset(),
         ),
       ),
     );
